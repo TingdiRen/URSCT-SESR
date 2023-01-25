@@ -325,3 +325,62 @@ class DataLoaderTestSR(Dataset):
         tar_img_SR = TF.resize(tar_img_SR, (self.ps[0], self.ps[1]))
 
         return inp_img, tar_img_SR
+
+
+class DataLoaderInf(Dataset):
+    def __init__(self, rgb_dir, img_options=None):
+        super(DataLoaderTest, self).__init__()
+
+        inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'input')))
+
+        self.inp_filenames = [os.path.join(rgb_dir, 'input', x) for x in inp_files if is_image_file(x)]
+
+        self.img_options = img_options
+        self.sizex = len(self.tar_filenames)  # get the size of target_enh
+
+        self.ps = self.img_options['patch_size']
+
+    def __len__(self):
+        return self.sizex
+
+    def __getitem__(self, index):
+        index_ = index % self.sizex
+
+        inp_path = self.inp_filenames[index_]
+
+
+        inp_img = Image.open(inp_path).convert('RGB')
+
+        inp_img = TF.to_tensor(inp_img)
+
+        inp_img = TF.resize(inp_img, (self.ps[0], self.ps[1]))
+
+        return inp_img
+
+class DataLoaderInfSR(Dataset):
+    def __init__(self, rgb_dir, img_options=None, SR_scale=2):
+        super(DataLoaderTestSR, self).__init__()
+
+        inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'input')))
+
+        self.inp_filenames = [os.path.join(rgb_dir, 'input', x) for x in inp_files if is_image_file(x)]
+
+        self.img_options = img_options
+        self.sizex = len(self.tar_filenames)  # get the size of target_enh
+
+        self.ps = self.img_options['patch_size']
+        self.scale = SR_scale
+
+    def __len__(self):
+        return self.sizex
+
+    def __getitem__(self, index):
+        index_ = index % self.sizex
+
+        inp_path = self.inp_filenames[index_]
+        inp_img = Image.open(inp_path).convert('RGB')
+        inp_img = TF.to_tensor(inp_img)
+
+        inp_img = TF.resize(inp_img, (self.ps[0] // self.scale, self.ps[1] // self.scale))
+
+        return inp_img

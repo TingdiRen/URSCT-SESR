@@ -1,9 +1,7 @@
-import os
-import torch
 import torchvision
 import yaml
-from PIL import Image
-from dataset.data_loader import get_test_data
+import argparse
+from dataset import *
 from torch.utils.data import DataLoader
 from utils.dir_utils import mkdir, get_last_path
 from utils.model_utils import load_checkpoint
@@ -12,40 +10,47 @@ from tqdm import tqdm
 from utils.image_utils import torchPSNR, torchSSIM
 import torchvision.transforms.functional as TF
 
-def get_dataloader(opt_test):
-    test_dataset = get_test_data(opt_test['TEST_DIR'], {'patch_size': opt_test['TEST_PS']})
-    return DataLoader(dataset=test_dataset, batch_size=1, shuffle=False, num_workers=opt_test['NUM_WORKS'],
-                      drop_last=False)
+def get_dataloader(opt_test, mode):
+    if mode == 'eval':
+        loader = DataLoader(dataset=get_test_data(opt_test['TEST_DIR'], {'patch_size': opt_test['TEST_PS']}),
+                   batch_size=1, shuffle=False, num_workers=opt_test['NUM_WORKS'])
+    elif mode == 'infer':
+        loader = DataLoader(dataset=get_infer_data(opt_test['TEST_DIR'], {'patch_size': opt_test['TEST_PS']}),
+                   batch_size=1, shuffle=False, num_workers=opt_test['NUM_WORKS'])
+    return loader
 
-def predict_save_eval(test_loader, opt_test):
-    PSNRs, SSIMs = [], []
-    for i, data in enumerate(tqdm(test_loader)):
-        input = data[0].to(device)
-        target_SR = data[1].to(device)
-        with torch.no_grad():
-            restored_SR = model(input)
-        PSNRs.append(torchPSNR(restored_SR, target_SR))
-        SSIMs.append(torchSSIM(restored_SR, target_SR))
-        torchvision.utils.save_image(torch.cat( (TF.resize(input[0], opt_test['TEST_PS']),
-                                                 restored_SR[0], target_SR[0]), -1),
-                                     os.path.join(result_dir, str(i) + '.png'))
-    return PSNRs, SSIMs
-
-
-def only_evaluate(x_path):
-    x_files = sorted(os.listdir(x_path))
-    y_files = sorted(os.listdir)
-    PSNRs, SSIMs = [], []
-    for ii, i in enumerate(x_files):
-        imgx = Image.open(os.path.join(x_path, i))
-        imgy = Image.open(os.path.join(x_path, y_files[ii]))
-        imgx = TF.to_tensor(imgx).unsqueeze(0)
-        imgy = TF.to_tensor(imgy).unsqueeze(0)
-        PSNRs.append(torchPSNR(imgx, imgy))
-        SSIMs.append(torchSSIM(imgx, imgy))
+def main(test_loader, opt_test, mode):
+    if mode == 'eval':
+        PSNRs, SSIMs = [], []
+        for i, data in enumerate(tqdm(test_loader)):
+            input = data[0].to(device)
+            target_SR = data[1].to(device)
+            with torch.no_grad():
+                restored_SR = model(input)
+            PSNRs.append(torchPSNR(restored_SR,target_SR))
+            SSIMs.append(torchSSIM(restored_SR, target_SR))
+            torchvision.utils.save_image(torch.cat( (TF.resize(input[0],opt_test['TEST_PS']),
+                                                     restored_SR[0],target_SR[0]), -1),
+                                         os.path.join(result_dir, str(i) + '.png'))
+        print(
+            "[PSNR] mean: {:.4f} std: {:.4f}".format(torch.stack(PSNRs).mean().item(), torch.stack(PSNRs).std().item()))
+        print(
+            "[SSIM] mean: {:.4f} std: {:.4f}".format(torch.stack(SSIMs).mean().item(), torch.stack(SSIMs).std().item()))
+    elif mode == 'infer':
+        for i, data in enumerate(tqdm(test_loader)):
+            input = data.to(device)
+            with torch.no_grad():
+                restored_SR = model(input)
+            torchvision.utils.save_image(torch.cat((TF.resize(input[0], opt_test['TEST_PS']),
+                                                    restored_SR[0]), -1),
+                                         os.path.join(result_dir, str(i) + '.png'))
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--mode', type=str, default='infer', choices=['infer','eval'], help='random seed')
+    mode = parser.parse_args().mode
+
     with open('../configs/Enh_opt.yaml', 'r') as config:
         opt = yaml.safe_load(config)
         opt_test = opt['TEST']
@@ -59,9 +64,6 @@ if __name__ == '__main__':
     load_checkpoint(model, path_chk_rest)
     model.eval()
 
-    test_loader = get_dataloader(opt_test)
-    PSNRs, SSIMs = predict_save_eval(test_loader, opt_test)
-    # PSNRs, SSIMs = only_evaluate(x_path=, y_path=)
-    print("[PSNR] mean: {:.4f} std: {:.4f}".format(torch.stack(PSNRs).mean().item(), torch.stack(PSNRs).std().item()))
-    print("[SSIM] mean: {:.4f} std: {:.4f}".format(torch.stack(SSIMs).mean().item(), torch.stack(SSIMs).std().item()))
+    test_loader = get_dataloader(opt_test, mode)
+    main(test_loader, opt_test)
 
