@@ -336,7 +336,7 @@ class DataLoaderInf(Dataset):
         self.inp_filenames = [os.path.join(rgb_dir, 'input', x) for x in inp_files if is_image_file(x)]
 
         self.img_options = img_options
-        self.sizex = len(self.tar_filenames)  # get the size of target_enh
+        self.sizex = len(self.inp_filenames)  # get the size of target_enh
 
         self.ps = self.img_options['patch_size']
 
@@ -347,7 +347,6 @@ class DataLoaderInf(Dataset):
         index_ = index % self.sizex
 
         inp_path = self.inp_filenames[index_]
-
 
         inp_img = Image.open(inp_path).convert('RGB')
 
@@ -366,7 +365,7 @@ class DataLoaderInfSR(Dataset):
         self.inp_filenames = [os.path.join(rgb_dir, 'input', x) for x in inp_files if is_image_file(x)]
 
         self.img_options = img_options
-        self.sizex = len(self.tar_filenames)  # get the size of target_enh
+        self.sizex = len(self.inp_filenames)  # get the size of target_enh
 
         self.ps = self.img_options['patch_size']
         self.scale = SR_scale
