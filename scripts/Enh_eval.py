@@ -65,5 +65,5 @@ if __name__ == '__main__':
     model.eval()
 
     test_loader = get_dataloader(opt_test, mode)
-    main(test_loader, opt_test)
+    main(test_loader, opt_test, mode)
 
