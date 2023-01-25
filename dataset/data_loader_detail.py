@@ -329,7 +329,7 @@ class DataLoaderTestSR(Dataset):
 
 class DataLoaderInf(Dataset):
     def __init__(self, rgb_dir, img_options=None):
-        super(DataLoaderTest, self).__init__()
+        super(DataLoaderInf, self).__init__()
 
         inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'input')))
 
@@ -359,7 +359,7 @@ class DataLoaderInf(Dataset):
 
 class DataLoaderInfSR(Dataset):
     def __init__(self, rgb_dir, img_options=None, SR_scale=2):
-        super(DataLoaderTestSR, self).__init__()
+        super(DataLoaderInfSR, self).__init__()
 
         inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'input')))
 
