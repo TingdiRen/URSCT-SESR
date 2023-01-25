@@ -8,3 +8,4 @@ pyyaml~=6.0
 tqdm~=4.64.1
 numpy~=1.22.1
 tensorboardx~=2.5.1
+pytorch_msssim
