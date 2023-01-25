@@ -1,0 +1,50 @@
+# Training configuration
+GPU: [0,1]
+
+MODEL_DETAIL:
+  IN_CHANS: 3
+  OUT_CHANS: 3
+  IMG_SIZE: [256, 256]
+  PATCH_SIZE: 2
+  WIN_SIZE: 8
+  EMB_DIM: 32
+  DEPTH_EN: [8, 8, 8, 8]
+  HEAD_NUM: [8, 8, 8, 8]
+  MLP_RATIO: 4.0
+  QKV_BIAS: True
+  QK_SCALE: 8
+  DROP_RATE: 0
+  ATTN_DROP_RATE: 0.
+  DROP_PATH_RATE: 0.1
+  APE: False
+  PATCH_NORM: True
+  USE_CHECKPOINTS: False
+
+# Optimization arguments.
+OPTIM:
+  BATCH: 2
+  EPOCHS: 800
+  # EPOCH_DECAY: [10]
+  LR_INITIAL: 5e-4
+  LR_MIN: 1e-6
+  BETA1: 0.9
+
+TRAINING:
+  MODEL_NAME: 'exp_Enh'
+  VAL_INTERVAL: 10
+  RANDOM_SPLIT: False
+  NUM_WORKS: 0
+  TEST_NUM: 300
+  RESUME: False
+  TRAIN_PS: [256, 256]
+  VAL_PS: [256, 256]
+  TRAIN_DIR: '../dataset/demo_data_Enh/train_data' # path to training dataset
+  VAL_DIR: '../dataset/demo_data_Enh/val_data' # path to validation dataset
+  SAVE_DIR: '../exps/'   # path to save models and images
+
+TEST:
+  DEVICE: 'cuda:0'
+  NUM_WORKS: 0
+  SAVE_DIR: '../exps/'
+  TEST_PS: [256, 256]
+  TEST_DIR: '../dataset/demo_data_Enh/test_data' # path to validation dataset
