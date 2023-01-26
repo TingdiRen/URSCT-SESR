@@ -20,16 +20,20 @@ This repository is the official PyTorch implementation of URSCT-SESR: Reinforced
 
 ## Contents
 
+1. [QucikStart](#QuickStart)
 1. [Training](#Training)
 2. [Testing](#Testing)
 3. [Download](#Download)
 4. [Citation](#Citation)
 
 
+## QuickStart
 
-## Training
+### We have put demo data in folder "_dataset/_", hence you can run any file "_\*.py_" in  folder "_scripts_".
 
-### 1. Put your dataset into the folder "_data_" as follows:
+## Training 
+
+### 1. Put your dataset into your folder storing data (for example "_./data_") as follows:
 _URSCT-SESR_<br />
 ├─ other files and folders<br />
 ├─ _data_<br />
@@ -45,14 +49,14 @@ _URSCT-SESR_<br />
 │&ensp;&ensp;├─ _test\_data_<br />
 │&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ ...
 
-### 2. Configure the _\*.yaml_:
+### 2. Configure the _configs/\*.yaml_:
 If you want to train with the default setting, _\*\_DIR_ of _TRAINING_ and _TEST_ is the main option you need to edit.
 
 (1) _Enh&SR\_opt.yaml_ for Simultaneous Underwater Sensing Scene Image Enhancement and Super-resolution
 
 (2) _Enh\_opt.yaml_ for Underwater Sensing Scene Image Enhancement only
 
-### 3. Run _\*\_train.py_
+### 3. Run _scripts/\*\_train.py_
 
 ## Testing
 
@@ -74,7 +78,7 @@ _URSCT-SESR_<br />
 │&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ _fig1.png_<br />
 │&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ ...<br />
 
-### 2. Run _\*\_eval.py_
+### 2. Run _scripts/\*\_eval.py_
 
 ## Download
 ### Model
