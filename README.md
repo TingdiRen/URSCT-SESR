@@ -29,7 +29,7 @@ This repository is the official PyTorch implementation of URSCT-SESR: Reinforced
 
 ## QuickStart
 
-### We have put demo data in folder "_./dataset/_", hence you can run any file "_\*.py_" in  folder "_./scripts_".
+### We have put demo data in folder "_./dataset_", hence you can run any file "_\*.py_" in  folder "_./scripts_".
 
 ## Training 
 
