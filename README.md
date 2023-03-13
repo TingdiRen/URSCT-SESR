@@ -83,7 +83,7 @@ _URSCT-SESR_<br />
 │&ensp;&ensp;│&ensp;&ensp;├─ _test\_data_<br />
 │&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ _input_<br />
 │&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ _fig1.png_<br />
-│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ ...<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ ...<br />
 │&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ _target_<br />
 │&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ _fig1.png_<br />
 │&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ ...<br />

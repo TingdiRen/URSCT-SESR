@@ -33,7 +33,7 @@ TRAINING:
   VAL_INTERVAL: 100
   RANDOM_SPLIT: False
   NUM_WORKS: 0
-  RESUME: True
+  RESUME: False
   TRAIN_PS: [256, 256]
   VAL_PS: [256, 256]
   TRAIN_DIR: '../dataset/demo_data_Enh/train_data' # path to training dataset
