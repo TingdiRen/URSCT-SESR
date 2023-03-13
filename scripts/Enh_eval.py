@@ -48,7 +48,7 @@ def main(test_loader, opt_test, mode):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mode', type=str, default='infer', choices=['infer','eval'], help='random seed')
+    parser.add_argument('--mode', type=str, default='infer', choices=['infer', 'eval'], help='random seed')
     mode = parser.parse_args().mode
 
     with open('../configs/Enh_opt.yaml', 'r') as config:

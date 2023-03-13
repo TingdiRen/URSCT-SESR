@@ -29,25 +29,34 @@ This repository is the official PyTorch implementation of URSCT-SESR: Reinforced
 
 ## QuickStart
 
-### We have put demo data in folder "_./dataset_", hence you can run any file "_\*.py_" in  folder "_./scripts_".
+### Start a custom training
+We have put demo data in folder "_./dataset_", hence you can run any file "_*\_train.py_" in  folder "_./scripts_".
 
+### Start a test with pre-trained model 
+If you want to use the pre-trained model for realistic images or testing, please read the following content about data settings. After that, run any file "_\*\_eval.py_" in folder "_./scripts_".
+
+### Start a fine-tuning with pre-trained model
+If you have downloaded the pre-trained model and intend to continue training/fine-tuning, please note:
+1. Since the code updating, the pre-trained weight data (a dict in python) uploaded before does not include any parameter about the optimizer. Hence, please reasonably set up the optimizer (e.g., a tiny learning rate).
+2. The default model loaded when resuming is "\*_bestSSIM.pth" (at line 84/85 in the training code), please check the model file name.
 ## Training 
 
-### 1. Put your dataset into your folder storing data (for example "_./data_") as follows:
+### 1. Put your dataset into your folder storing data (for example "_./dataset/demo_data_Enh_") as follows:
 _URSCT-SESR_<br />
 ├─ other files and folders<br />
-├─ _data_<br />
-│&ensp;&ensp;├─ _train\_data_<br />
-│&ensp;&ensp;│&ensp;&ensp;├─ _input_<br />
-│&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ _fig1.png_<br />
-│&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ ...<br />
-│&ensp;&ensp;│&ensp;&ensp;├─ _target_<br />
-│&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ _fig1.png_<br />
-│&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ ...<br />
-│&ensp;&ensp;├─ _val\_data_<br />
-│&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ ...<br />
-│&ensp;&ensp;├─ _test\_data_<br />
-│&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ ...
+├─ _dataset_<br />
+│&ensp;&ensp;├─ _demo\_data\_Enh_<br />
+│&ensp;&ensp;│&ensp;&ensp;├─ _train\_data_<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ _input_<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ _fig1.png_<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ ...<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ _target_<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ _fig1.png_<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ ...<br />
+│&ensp;&ensp;│&ensp;&ensp;├─ _val\_data_<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ ...<br />
+│&ensp;&ensp;│&ensp;&ensp;├─ _test\_data_<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ ...
 
 ### 2. Configure the _configs/\*.yaml_:
 If you want to train with the default setting, _\*\_DIR_ of _TRAINING_ and _TEST_ is the main option you need to edit.
@@ -63,20 +72,21 @@ If you want to train with the default setting, _\*\_DIR_ of _TRAINING_ and _TEST
 ### 1. As reported above, put your dataset for testing and model we provided into the folders as follows:
 _URSCT-SESR_<br />
 ├─ other files and folders<br />
-├─ _checkpoints_<br />
-│&ensp;&ensp;├─ _model\_test_ (same as configurated above)<br />
+├─ _exps_<br />
+│&ensp;&ensp;├─ _quickstart\_Enh_ (same as configurated above)<br />
 │&ensp;&ensp;│&ensp;&ensp;├─ _models_<br />
 │&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ _model\_bestSSIM.pth_ (downloaded model)<br />
-├─ _data_<br />
-│&ensp;&ensp;├─ _train\_data_<br />
-│&ensp;&ensp;├─ _val\_data_<br />
-│&ensp;&ensp;├─ _test\_data_<br />
-│&ensp;&ensp;│&ensp;&ensp;├─ _input_<br />
-│&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ _fig1.png_<br />
-│&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ ...<br />
-│&ensp;&ensp;│&ensp;&ensp;├─ _target_<br />
-│&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ _fig1.png_<br />
-│&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ ...<br />
+├─ _dataset_<br />
+│&ensp;&ensp;├─ _demo_data_Enh_<br />
+│&ensp;&ensp;│&ensp;&ensp;├─ _train\_data_<br />
+│&ensp;&ensp;│&ensp;&ensp;├─ _val\_data_<br />
+│&ensp;&ensp;│&ensp;&ensp;├─ _test\_data_<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ _input_<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ _fig1.png_<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;&ensp;&ensp;&ensp;├─ ...<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ _target_<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ _fig1.png_<br />
+│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;│&ensp;&ensp;├─ ...<br />
 
 ### 2. Run _scripts/\*\_eval.py_
 

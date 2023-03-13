@@ -35,7 +35,7 @@ def load_checkpoint(model, weights):
             name = k[10:]  # remove `module.`
             new_state_dict[name] = v
         model.load_state_dict(new_state_dict, strict=False)
-    print("MOdel loading successfully!")
+    print("Model loading successfully!")
 
 
 def load_checkpoint_multigpu(model, weights):

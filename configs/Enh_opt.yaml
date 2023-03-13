@@ -30,11 +30,10 @@ OPTIM:
 
 TRAINING:
   MODEL_NAME: 'quickstart_Enh'
-  VAL_INTERVAL: 10
+  VAL_INTERVAL: 100
   RANDOM_SPLIT: False
   NUM_WORKS: 0
-  TEST_NUM: 300
-  RESUME: False
+  RESUME: True
   TRAIN_PS: [256, 256]
   VAL_PS: [256, 256]
   TRAIN_DIR: '../dataset/demo_data_Enh/train_data' # path to training dataset

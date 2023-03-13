@@ -77,10 +77,10 @@ def main(opt):
     Charbonnier_loss = Charbonnier_Loss().cuda()
 
     ## Resume (Continue training by a pretrained model)
-    start_epoch, best_psnr, best_ssim = 1, 0., 0.
+    start_epoch, best_psnr, best_ssim, best_epoch_psnr, best_epoch_ssim = 1, 0., 0., 0, 0
     if train_opt['RESUME']:
         print("================= Loading Resuming configuration ================= ")
-        path_chk_rest = get_last_path(model_dir, '_latest.pth')
+        path_chk_rest = get_last_path(model_dir, '_bestSSIM.pth')
         load_checkpoint(model, path_chk_rest)
         start_epoch = load_start_epoch(path_chk_rest) + 1
         best_psnr, best_ssim = load_best_metrics(path_chk_rest)

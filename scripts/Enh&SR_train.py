@@ -79,10 +79,10 @@ def main(opt):
 
     ## Resume
     start_epoch = 1
-    best_psnr, best_ssim = 0., 0.
+    best_psnr, best_ssim, best_epoch_ssim, best_epoch_psnr = 0., 0., 0, 0
     if train_opt['RESUME']:
         print("================= Loading Resuming configuration ================= ")
-        path_model_resume = get_last_path(model_dir, '_latest.pth')
+        path_model_resume = get_last_path(model_dir, '_bestSSIM.pth')
         load_checkpoint(model, path_model_resume)
         start_epoch = load_start_epoch(path_model_resume) + 1
         best_psnr, best_ssim = load_best_metrics(path_model_resume)
