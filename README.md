@@ -1,5 +1,5 @@
 # URSCT-SESR: Reinforced Swin-Convs Transformer for Simultaneous Underwater Sensing Scene Image Enhancement and Super-resolution
-[Tingdi Ren](http://www.adilifer.com/), Haiyongxu, Gangyi Jiang, Mei Yu, Xuan Zhang, Biao Wang, and Ting Luo.
+[Tingdi Ren](http://www.adilifer.com/), Haiyong Xu, Gangyi Jiang, Mei Yu, Xuan Zhang, Biao Wang, and Ting Luo.
 
 
 ---
