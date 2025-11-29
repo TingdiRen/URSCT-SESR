@@ -8,7 +8,7 @@
 [![arXiv](https://img.shields.io/badge/IEEE-Paper-%3CCOLOR%3E.svg)](https://ieeexplore.ieee.org/document/9881581)
 [![GitHub Stars](https://img.shields.io/github/stars/TingdiRen/URSCT-SESR?style=social)](https://github.com/TingdiRen/URSCT-SESR)
 [![download](https://img.shields.io/github/downloads/TingdiRen/URSCT-SESR/total.svg)](https://github.com/TingdiRen/URSCT-SESR/releases)
-![visitors](https://visitor-badge.glitch.me/badge?page_id=TingdiRen/URSCT-SESR)
+![visitors](https://img.shields.io/github/watchers/TingdiRen/URSCT-SESR)
 [ <a href="https://colab.research.google.com/drive/1CXQOHG_Yc5aQ3WvlQKLlHNLA89wXkRjA?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a>](https://colab.research.google.com/gist/JingyunLiang/a5e3e54bc9ef8d7bf594f6fee8208533/swinir-demo-on-real-world-image-sr.ipynb)
 
 
